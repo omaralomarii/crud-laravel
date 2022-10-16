@@ -28,3 +28,9 @@ Route::get('addBooks',function(){
     return view('addBooks');
 });
 
+
+Route::get('update/{id}',[BookController::class,'update']);
+
+Route::post('updateBook/{id}',[BookController::class,'updateBook']);
+
+Route::get('delete/{id}',[BookController::class,'destroy']);

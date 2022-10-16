@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
 </head>
 <body>
+
+
     
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
@@ -78,8 +80,8 @@
       <h5 class="card-title">{{$item['book_title']}}</h5>
       <p class="card-text">{{$item['book_author']}}</p>
       <p class="card-text">{{$item['description']}}</p>
-      <a href="#" class="btn btn-primary">Update</a>
-      <a href="#" class="btn btn-primary">Delete</a>
+      <a href="/update/{{$item['id']}}" class="btn btn-primary">Update</a>
+      <a href="/delete/{{$item['id']}}" class="btn btn-primary">Delete</a>
       
 
     </div>

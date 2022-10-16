@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Models\BookModel;
-
+use Illuminate\Http\UploadedFile;
 
 
 class BookController extends Controller
@@ -17,10 +16,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        // echo "hello";
         $allBook = BookModel::all();
         return view('books',['allBook'=>$allBook]);
-
     }
 
     /**
@@ -42,15 +39,24 @@ class BookController extends Controller
     public function store(Request $request)
     {
         // dd($request);
+        // create new model to connect to table in database 
         $book = new BookModel();
+        $request->validate([
+            'book_title' =>'require',
+            'book_image'=>'required',
+        ]);
+        // database         form name 
         $book->book_title = $request->book_title;
         $book->book_description = $request->book_description;
         $book->book_author = $request->book_author;
-        $book->book_image = $request->book_image;
+        // dd($request->book_image);
+      
+        $image_path = $request->file('book_image')->store('images');
+        // dd($request);
+        $book->book_image = $image_path;
         $book->save();
 
-       return redirect('index');
-
+        return redirect('index');
     }
 
     /**
@@ -84,7 +90,20 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $books = BookModel::find($id);
+        return view('updateBook',['request'=>$books,'id'=>$id] );
+    } 
+    
+    public function updateBook(Request $request, $id)
+    {
+        $book = BookModel::find($id);
+        $book->book_title = $request->book_title;
+        $book->book_description = $request->book_description;
+        $book->book_author = $request->book_author;
+        $book->book_image = $request->book_image;
+        $book->save();
+        return redirect('/index');
+       
     }
 
     /**
@@ -95,6 +114,13 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
+
+        $book=BookModel::find($id);
+
+        $book->delete();
+        return redirect('/index');
+
+
         //
     }
 }

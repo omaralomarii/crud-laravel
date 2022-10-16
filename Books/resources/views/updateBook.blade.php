@@ -16,7 +16,8 @@
     @endif
     
     <div class="constant w-25 d-flex justify-content-center">
-        <form action="/store" method="POST">
+        <form action="/updateBook/{{$id}}" method="POST">
+           {{-- @method('put') --}}
            
     @csrf
 
@@ -43,7 +44,7 @@
               <input type="checkbox" class="form-check-input" id="exampleCheck1">
               <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div> --}}<br>
-            <button type="submit" class="btn btn-primary">Add Books</button>
+            <button type="submit" class="btn btn-primary">update</button>
             
           </form>
         </div>
