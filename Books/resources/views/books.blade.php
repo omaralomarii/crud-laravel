@@ -81,7 +81,7 @@
       <p class="card-text">{{$item['book_author']}}</p>
       <p class="card-text">{{$item['description']}}</p>
       <a href="/update/{{$item['id']}}" class="btn btn-primary">Update</a>
-      <a href="/delete/{{$item['id']}}" class="btn btn-primary">Delete</a>
+      <a href="/delete/{{$item['id']}}" class="btn btn-primary"onclick="return confirm('Are you sure?')">Delete</a>
       
 
     </div>
